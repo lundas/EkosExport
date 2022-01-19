@@ -215,12 +215,12 @@ class EkosExport:
 
 
 if __name__ == '__main__':
-	geckodriver='/PATH/TO/geckodriver'
+	geckodriver='/usr/local/bin/geckodriver'
 
-	username = 'ekos user'
-	password = 'ekos pw'
-	report = 'Report Name'
-	dl_dir = '/PATH/to/Downloads'
+	username = 'lund@laughingmonkbrewing.com'
+	password = '8*oPyNfKZcWJ5H8bjzbw'
+	report = 'Distribution - Friday'
+	dl_dir = '/Users/ASL/Downloads/'
 
 	ekos = EkosExport(
 		'Firefox',
@@ -233,6 +233,6 @@ if __name__ == '__main__':
 	ekos.login(ekos.session,username,password)
 	ekos.download_report(ekos.session, report)
 	ekos.rename_file('{}.csv'.format(report))
-	# ekos.quit(ekos.session)
+	ekos.quit(ekos.session)
 
 
