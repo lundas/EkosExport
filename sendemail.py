@@ -4,26 +4,26 @@ import os
 import smtplib
 import mimetypes
 import logging
-from email.MIMEMultipart import MIMEMultipart
 from email import encoders
-from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 from email.mime.audio import MIMEAudio
-from email.mime.base import MIMEBase
 from email.mime.image import MIMEImage
+from email.mime.text import MIMEText
 
-# Set up logging
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-# Create file handler
-fh = logging.FileHandler('DeliveryFormat/deliveryformat.log') # PATH to file on local machine
-fh.setLevel(logging.INFO)
-# Create formatter
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-# Add formatter to fh
-fh.setFormatter(formatter)
-# Add fh to logger
-logger.addHandler(fh)
+# # Set up logging
+# logger = logging.getLogger(__name__)
+# logger.setLevel(logging.INFO)
+# # Create file handler
+# fh = logging.FileHandler('DeliveryFormat/deliveryformat.log') # PATH to file on local machine
+# fh.setLevel(logging.INFO)
+# # Create formatter
+# formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+# # Add formatter to fh
+# fh.setFormatter(formatter)
+# # Add fh to logger
+# logger.addHandler(fh)
 
 def send_gmail(
 	message, 
@@ -57,7 +57,7 @@ def send_gmail(
 	file_to_send : attachment file
 	'''
 
-	logger.info('Sending Email')
+	# logger.info('Sending Email')
 
 	msg = MIMEMultipart()
 	msg['From'] = email_from
