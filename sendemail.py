@@ -26,7 +26,6 @@ fh.setFormatter(formatter)
 logger.addHandler(fh)
 
 def send_gmail(
-	self, 
 	message, 
 	subject, 
 	email_to, 
@@ -150,3 +149,23 @@ def send_gmail(
 	server.quit()
 
 	return
+
+
+if __name__ == '__main__':
+	message = 'This is a test email'
+	subject = 'Testing send_gmail'
+	email_to = ''
+	email_from = '' 
+	password = ''
+
+	send_gmail(
+		message, 
+		subject, 
+		email_to, 
+		email_from, 
+		password
+	)
+
+
+
+
