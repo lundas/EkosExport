@@ -5,7 +5,7 @@ from src import ekosexport
 from src import googleapi
 
 #Config file
-conf_file = './deliveries_config.yaml' # path to config file
+conf_file = './deliveries_config_SAMPLE.yaml' # path to config file
 stream = open(conf_file, 'r')
 config = yaml.safe_load(stream)
 
