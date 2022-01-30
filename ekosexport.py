@@ -15,7 +15,7 @@ from selenium.common.exceptions import NoSuchFrameException
 from selenium.common.exceptions import ElementClickInterceptedException
 
 class EkosExport:
-	'''Class for accessing and downloading itmes from Ekos ERP using Selenium
+	'''Class for accessing and downloading items from Ekos ERP using Selenium
 	Webdriver.
 
 	Requires geckodriver for Firefox, ChromeDriver for Chrome
