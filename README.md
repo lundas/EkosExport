@@ -19,11 +19,11 @@ for integration with other systems that would ordinarily be handled by an API.
 ## Roadmap
 - [x] Push src
 - [x] Add deliveries.py for deliveries export + deliveries_config_SAMPLE
-- [] Add Changelog
-- [] Add requirements.txt
-- [] Finish updating README
-- [] Add Ekos Boost Compatible Allocations Tool
-- [] Workwave Route Manager Integration
+- [ ] Add Changelog
+- [ ] Add requirements.txt
+- [ ] Finish updating README
+- [ ] Add Ekos Boost Compatible Allocations Tool
+- [ ] Workwave Route Manager Integration
 ## License
 Distributed under the MIT License. See [LICENSE](https://github.com/lundas/EkosExport/blob/master/LICENSE)
 for more information.
