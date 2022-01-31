@@ -29,7 +29,7 @@ Distributed under the MIT License. See [LICENSE](https://github.com/lundas/EkosE
 for more information.
 
 ## Contact
-Lund - [@lundas_](https://twitter.com/lundas_) - [lund@laughingmonkbrewing.com](lund@laughingmonkbrewing.com)
+Lund - [@lundas_](https://twitter.com/lundas_) - [lund@laughingmonkbrewing.com](mailto:lund@laughingmonkbrewing.com)
 
 Project Link: (https://github.com/lundas/EkosExport) 
 
