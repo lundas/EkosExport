@@ -23,6 +23,7 @@ for integration with other systems that would ordinarily be handled by an API.
     - [x] Gmail
     - [ ] BigQuery
 - [x] Add deliveries.py for deliveries export + deliveries_config_SAMPLE
+- [ ] Implement Logging
 - [ ] Add Changelog
 - [ ] Add requirements.txt
 - [ ] Finish updating README
