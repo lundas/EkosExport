@@ -126,6 +126,7 @@ class EkosExport:
         elem.send_keys(Keys.RETURN)
 
         print('Login Successful')
+        self.session.implicitly_wait(10)
 
         # session.implicitly_wait(10) #wait for page to load
 
@@ -148,12 +149,13 @@ class EkosExport:
 
         # Navigate to reports page
         print('navigating to reports page')
-        elem = self.wait.until(
-            EC.element_to_be_clickable(
-                # select 4th button in nav-options div
-                (By.XPATH, "//div[@class='nav-options']/button[4]")
-            )
-        )
+        elem = self.session.find_element_by_xpath("//div[@class='nav-options']/button[4]")
+        # elem = self.wait.until(
+        #     EC.element_to_be_clickable(
+        #         # select 4th button in nav-options div
+        #         (By.XPATH, "//div[@class='nav-options']/button[4]")
+        #     )
+        # )
         elem.click()
 
         elem = self.wait.until(
@@ -203,15 +205,11 @@ class EkosExport:
         )
         elem.click()
 
-        # close iFrame
-        print('switching to default content')
-        self.session.switch_to.default_content()
-        print('switching to iFrame')
-        self.session.switch_to.frame('classicContainer')
+        # close iframe
         print('closing iFrame')
         elem = self.wait.until(
             EC.element_to_be_clickable(
-                (By.CLASS_NAME, 'formClose')
+                (By.CLASS_NAME, 'CloseButton')
             )
         )
         elem.click()
@@ -267,12 +265,18 @@ class EkosExport:
 
 
 if __name__ == '__main__':
-    geckodriver='/PATH/to/geckodriver'
+    import yaml
+    #Config file
+    conf_file = './deliveries_config.yaml' # path to config file
+    stream = open(conf_file, 'r')
+    config = yaml.safe_load(stream)
 
-    username = ''
-    password = ''
-    report = ''
-    dl_dir = ''
+    geckodriver = config['driver_path']
+
+    username = config['ekos_user']
+    password = config['ekos_pw']
+    report = 'Distro - This Week'
+    dl_dir = config['profile_dir_path']
 
     ekos = EkosExport(
         'Firefox',
