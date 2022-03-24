@@ -99,8 +99,10 @@ class EkosExport:
                 executable_path=self.driver_path,
                 options=self.options
             )
-            # wait for web elements to load
+            # implicit wait
             self.session.implicitly_wait(10)
+            #explicit wait
+            self.wait = WebDriverWait(self.session, 10)
 
     def login(self, username, password):
         ''' Logs in to Ekos using credential provided by user and handles
@@ -146,14 +148,20 @@ class EkosExport:
 
         # Navigate to reports page
         print('navigating to reports page')
-        elem = self.session.find_element_by_xpath(
-            # select 4th button in nav-options div
-            "//div[@class='nav-options']/button[4]"
+        elem = self.wait.until(
+            EC.element_to_be_clickable(
+                # select 4th button in nav-options div
+                (By.XPATH, "//div[@class='nav-options']/button[4]")
+            )
         )
         elem.click()
-        elem = self.session.find_element_by_xpath(
-            # select first link -- Report Category
-            "//div[@class='nav-option--group']/a[1]")
+
+        elem = self.wait.until(
+            EC.element_to_be_clickable(
+                # select first link -- Report Category
+                (By.XPATH, "//div[@class='nav-option--group']/a[1]")
+            )
+        )
         elem.click()
 
         # Reports page is Ekos Classic iFrame
@@ -166,7 +174,11 @@ class EkosExport:
         # elem = WebDriverWait(session, 5).until(
         #   EC.element_to_be_clickable((By.LINK_TEXT, report_name))
         # )
-        elem = self.session.find_element_by_link_text(report_name)
+        elem = self.wait.until(
+            EC.element_to_be_clickable(
+                (By.LINK_TEXT, report_name)
+            )
+        )
         elem.click()
 
         # switch to iframe
@@ -175,12 +187,20 @@ class EkosExport:
 
         # click export button
         print('clicking export button')
-        elem = self.session.find_element_by_class_name('buttonGroupInner')
+        elem = self.wait.until(
+            EC.element_to_be_clickable(
+                (By.CLASS_NAME, 'buttonGroupInner')
+            )
+        )
         elem.click()
 
         # download report as csv
         print('downloading report as csv to {}'.format(self.profile_dir_path))
-        elem = self.session.find_element_by_id('csv_export')
+        elem = self.wait.until(
+            EC.element_to_be_clickable(
+                (By.ID, 'csv_export')
+            )
+        )
         elem.click()
 
         # close iFrame
@@ -189,7 +209,11 @@ class EkosExport:
         print('switching to iFrame')
         self.session.switch_to.frame('classicContainer')
         print('closing iFrame')
-        elem=self.session.find_element_by_class_name('formClose')
+        elem = self.wait.until(
+            EC.element_to_be_clickable(
+                (By.CLASS_NAME, 'formClose')
+            )
+        )
         elem.click()
 
         return
