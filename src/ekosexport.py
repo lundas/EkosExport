@@ -102,24 +102,24 @@ class EkosExport:
             # wait for web elements to load
             self.session.implicitly_wait(10)
 
-    def login(self, session, username, password):
+    def login(self, username, password):
         ''' Logs in to Ekos using credential provided by user and handles
         any alerts that may occur during log in
 
         PARAMS
         -----------
-        session : selenium webdriver session iniated using open session funciton
+        session : selenium webdriver session. Initiated when class in invoked
         username : ekos ERP username
         password : ekos ERP password
         '''
         #open webdriver, go to Ekos login page
         print('Logging into Ekos')
-        session.get('https://login.goekos.com/')
-        assert 'Ekos' in session.title
+        self.session.get('https://login.goekos.com/')
+        assert 'Ekos' in self.session.title
         # enter login credentials
-        elem = session.find_element_by_id('txtUsername')
+        elem = self.session.find_element_by_id('txtUsername')
         elem.send_keys(username)
-        elem = session.find_element_by_id('txtPassword')
+        elem = self.session.find_element_by_id('txtPassword')
         elem.send_keys(password)
         elem.send_keys(Keys.RETURN)
 
@@ -129,7 +129,7 @@ class EkosExport:
 
         return
 
-    def download_report(self, session, report_name):
+    def download_report(self, report_name):
         '''Clicks report name and downloads report as csv
 
         PARAMS
@@ -146,12 +146,12 @@ class EkosExport:
 
         # Navigate to reports page
         print('navigating to reports page')
-        elem = session.find_element_by_xpath(
+        elem = self.session.find_element_by_xpath(
             # select 4th button in nav-options div
             "//div[@class='nav-options']/button[4]"
         )
         elem.click()
-        elem = session.find_element_by_xpath(
+        elem = self.session.find_element_by_xpath(
             # select first link -- Report Category
             "//div[@class='nav-option--group']/a[1]")
         elem.click()
@@ -159,49 +159,49 @@ class EkosExport:
         # Reports page is Ekos Classic iFrame
         # Switch to iFrame
         print('switching to iFrame')
-        session.switch_to.frame('classicContainer')
+        self.session.switch_to.frame('classicContainer')
         
         # find link by link text
         print('opening report name: {}'.format(report_name))
         # elem = WebDriverWait(session, 5).until(
         #   EC.element_to_be_clickable((By.LINK_TEXT, report_name))
         # )
-        elem = session.find_element_by_link_text(report_name)
+        elem = self.session.find_element_by_link_text(report_name)
         elem.click()
 
         # switch to iframe
         print('switching to iFrame')
-        session.switch_to.frame('formFrame_0')
+        self.session.switch_to.frame('formFrame_0')
 
         # click export button
         print('clicking export button')
-        elem = session.find_element_by_class_name('buttonGroupInner')
+        elem = self.session.find_element_by_class_name('buttonGroupInner')
         elem.click()
 
         # download report as csv
         print('downloading report as csv to {}'.format(self.profile_dir_path))
-        elem = session.find_element_by_id('csv_export')
+        elem = self.session.find_element_by_id('csv_export')
         elem.click()
 
         # close iFrame
         print('switching to default content')
-        session.switch_to.default_content()
+        self.session.switch_to.default_content()
         print('switching to iFrame')
-        session.switch_to.frame('classicContainer')
+        self.session.switch_to.frame('classicContainer')
         print('closing iFrame')
-        elem=session.find_element_by_class_name('formClose')
+        elem=self.session.find_element_by_class_name('formClose')
         elem.click()
 
         return
 
-    def quit(self, session):
+    def quit(self):
         '''Quits session opened by open_session
 
         PARAMS
         ---------
         session : Selenium webdriver session returned by open_session function
         '''
-        session.quit()
+        self.session.quit()
         return
 
     def rename_file(
@@ -258,9 +258,9 @@ if __name__ == '__main__':
         headless=False
     )
 
-    ekos.login(ekos.session,username,password)
-    ekos.download_report(ekos.session, report)
+    ekos.login(username,password)
+    ekos.download_report(report)
     ekos.rename_file('{}.csv'.format(report))
-    ekos.quit(ekos.session)
+    ekos.quit()
 
 
