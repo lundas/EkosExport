@@ -1,0 +1,12 @@
+#EkosExport
+driver_path : /PATH/to/geckodriver
+profile_dir_path : /PATH/to/downloads/
+
+# ekos
+ekos_user : ekos_username
+ekos_pw : ekos_password
+
+# google api
+spreadsheet_id : take_from_url
+cred_path : /PATH/to/client_secret.json
+token_path : /PATH/to/token.json
