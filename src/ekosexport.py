@@ -149,15 +149,6 @@ class EkosExport:
 
         # Navigate to reports page
         print('navigating to reports page')
-<<<<<<< HEAD
-        elem = self.session.find_element_by_xpath("//div[@class='nav-options']/button[4]")
-        # elem = self.wait.until(
-        #     EC.element_to_be_clickable(
-        #         # select 4th button in nav-options div
-        #         (By.XPATH, "//div[@class='nav-options']/button[4]")
-        #     )
-        # )
-=======
         elem = self.wait.until(
             EC.element_to_be_clickable(
                 # select 4th button in nav-options div
@@ -167,7 +158,6 @@ class EkosExport:
                 )
             )
         )
->>>>>>> master
         elem.click()
 
         elem = self.wait.until(
@@ -282,11 +272,7 @@ class EkosExport:
 if __name__ == '__main__':
     import yaml
     #Config file
-<<<<<<< HEAD
-    conf_file = './deliveries_config.yaml' # path to config file
-=======
     conf_file = './deliveries_config_SAMPLE.yaml' # path to config file
->>>>>>> master
     stream = open(conf_file, 'r')
     config = yaml.safe_load(stream)
 
@@ -294,11 +280,7 @@ if __name__ == '__main__':
 
     username = config['ekos_user']
     password = config['ekos_pw']
-<<<<<<< HEAD
-    report = 'Distro - This Week'
-=======
     report = ''
->>>>>>> master
     dl_dir = config['profile_dir_path']
 
     ekos = EkosExport(
