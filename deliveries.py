@@ -49,10 +49,10 @@ if __name__ == '__main__':
 		spreadsheet_id = SPREADSHEET_ID
 	)
 
-	ekos.login(ekos.session, username, password)
-	ekos.download_report(ekos.session, report_name)
+	ekos.login(username, password)
+	ekos.download_report(report_name)
 	ekos.rename_file('{}.csv'.format(report_name))
-	ekos.quit(ekos.session)
+	ekos.quit()
 
 	credentials = gs.get_credentials(cred_path, token_path)
 	service = gs.get_service(credentials)
