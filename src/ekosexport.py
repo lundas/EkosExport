@@ -100,7 +100,7 @@ class EkosExport:
                 options=self.options
             )
             # implicit wait
-            self.session.implicitly_wait(10)
+            self.session.implicitly_wait(30)
             #explicit wait
             self.wait = WebDriverWait(self.session, 10)
 
@@ -126,7 +126,6 @@ class EkosExport:
         elem.send_keys(Keys.RETURN)
 
         print('Login Successful')
-        self.session.implicitly_wait(10)
 
         # session.implicitly_wait(10) #wait for page to load
 
@@ -149,19 +148,24 @@ class EkosExport:
 
         # Navigate to reports page
         print('navigating to reports page')
-        elem = self.session.find_element_by_xpath("//div[@class='nav-options']/button[4]")
-        # elem = self.wait.until(
-        #     EC.element_to_be_clickable(
-        #         # select 4th button in nav-options div
-        #         (By.XPATH, "//div[@class='nav-options']/button[4]")
-        #     )
-        # )
+        elem = self.wait.until(
+            EC.element_to_be_clickable(
+                # select 4th button in nav-options div
+                (
+                    By.XPATH,
+                    "//div[@class='nav-options']//div[text()='Reporting']"
+                )
+            )
+        )
         elem.click()
 
         elem = self.wait.until(
             EC.element_to_be_clickable(
                 # select first link -- Report Category
-                (By.XPATH, "//div[@class='nav-option--group']/a[1]")
+                (
+                    By.XPATH, 
+                    "//div[@class='nav-option--group']//div[text()='All Reports']"
+                )
             )
         )
         elem.click()
