@@ -31,7 +31,7 @@ cred_path = config['cred_path']
 token_path = config['token_path']
 
 # Sheet info
-DATA_RANGE_NAME = 'data!A:P'
+DATA_RANGE_NAME = 'data!A:T'
 INFO_RANGE_NAME = 'info!B1'
 data = '{}{}.csv'.format(config['profile_dir_path'], report_name)
 

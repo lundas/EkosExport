@@ -17,36 +17,36 @@ class SheetsAPI:
         scopes,
         spreadsheet_id
     ):
-    '''Class of functions for interacting with the Google Sheest API. Initialized
-    using the required API scopes and well as with the spreadsheet_id for the 
-    Google Sheets Spreadsheet Resource to be modified
+        '''Class of functions for interacting with the Google Sheest API. Initialized
+        using the required API scopes and well as with the spreadsheet_id for the 
+        Google Sheets Spreadsheet Resource to be modified
 
-    PARAMS
-    ------------
-    scopes : OAuth 2.0 scopes that determine level of access to the API. Best 
-    practice is to provide the minimum level of access necessary to perform
-    the necessary tasks.
+        PARAMS
+        ------------
+        scopes : OAuth 2.0 scopes that determine level of access to the API. Best 
+        practice is to provide the minimum level of access necessary to perform
+        the necessary tasks.
 
-        'https://www.googleapis.com/auth/drive' : See, edit, create, and delete
-            all of your Google Drive files
+            'https://www.googleapis.com/auth/drive' : See, edit, create, and delete
+                all of your Google Drive files
 
-        'https://www.googleapis.com/auth/drive.file' : View and manage Google
-            Drive files and folders that you have opened or created with this app
+            'https://www.googleapis.com/auth/drive.file' : View and manage Google
+                Drive files and folders that you have opened or created with this app
 
-        'https://www.googleapis.com/auth/drive.readonly' : See and download all
-            your Google Drive files
+            'https://www.googleapis.com/auth/drive.readonly' : See and download all
+                your Google Drive files
 
-        'https://www.googleapis.com/auth/spreadsheets' : See, edit, create, and 
-            delete your spreadsheets in Google Drive
+            'https://www.googleapis.com/auth/spreadsheets' : See, edit, create, and 
+                delete your spreadsheets in Google Drive
 
-        'https://www.googleapis.com/auth/spreadsheets.readonly' : View your Google Spreadsheets
+            'https://www.googleapis.com/auth/spreadsheets.readonly' : View your Google Spreadsheets
 
-    spreadsheet_id : Value containing letters, numbers, hyphers, or underscores
-    that is used to identify a Spreadsheet resourece; it can be found in the 
-    Google Sheets URL
+        spreadsheet_id : Value containing letters, numbers, hyphers, or underscores
+        that is used to identify a Spreadsheet resourece; it can be found in the 
+        Google Sheets URL
 
-        e.g. https://docs.google.com/spreadsheets/d/spreadsheet_id/edit#gid=0
-    '''
+            e.g. https://docs.google.com/spreadsheets/d/spreadsheet_id/edit#gid=0
+        '''
         self.scopes = scopes
         self.spreadsheet_id = spreadsheet_id
 
