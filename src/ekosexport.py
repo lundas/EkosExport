@@ -158,7 +158,10 @@ class EkosExport:
                 )
             )
         )
-        elem.click()
+        # elem.click()
+        self.session.execute_script(
+            "document.getElementsByClassName('nav-option nav-option--main')[4].click()"
+        ) # use javascript to negate issues with selenium clicking on element
 
         elem = self.wait.until(
             EC.element_to_be_clickable(
@@ -169,7 +172,10 @@ class EkosExport:
                 )
             )
         )
-        elem.click()
+        # elem.click()
+        self.session.execute_script(
+            "document.getElementsByClassName('nav-option nav-option--main')[0].click()"
+        ) # use javascript to negate issues with selenium clicking on element
 
         # Reports page is Ekos Classic iFrame
         # Switch to iFrame

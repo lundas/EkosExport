@@ -36,30 +36,34 @@ INFO_RANGE_NAME = 'info!B1'
 data = '{}{}.csv'.format(config['profile_dir_path'], report_name)
 
 if __name__ == '__main__':
-	ekos = ekosexport.EkosExport(
-		browser = browser,
-		driver_path = driver_path,
-		profile_dir = profile_dir,
-		profile_dir_path = profile_dir_path,
-		headless = headless
-	)
+    try:    
+        ekos = ekosexport.EkosExport(
+            browser = browser,
+            driver_path = driver_path,
+            profile_dir = profile_dir,
+            profile_dir_path = profile_dir_path,
+            headless = headless
+        )
 
-	gs = googleapi.SheetsAPI(
-		scopes = SCOPES,
-		spreadsheet_id = SPREADSHEET_ID
-	)
+        gs = googleapi.SheetsAPI(
+            scopes = SCOPES,
+            spreadsheet_id = SPREADSHEET_ID
+        )
 
-	ekos.login(username, password)
-	ekos.download_report(report_name)
-	ekos.rename_file('{}.csv'.format(report_name))
-	ekos.quit()
+        ekos.login(username, password)
+        ekos.download_report(report_name)
+        ekos.rename_file('{}.csv'.format(report_name))
+        ekos.quit()
 
-	credentials = gs.get_credentials(cred_path, token_path)
-	service = gs.get_service(credentials)
-	gs.import_data(
-		service = service,
-		data = data,
-		sheet_range = DATA_RANGE_NAME
-	)
-	gs.last_updated(service = service, sheet_range = INFO_RANGE_NAME)
+        credentials = gs.get_credentials(cred_path, token_path)
+        service = gs.get_service(credentials)
+        gs.import_data(
+            service = service,
+            data = data,
+            sheet_range = DATA_RANGE_NAME
+        )
+        gs.last_updated(service = service, sheet_range = INFO_RANGE_NAME)
+    except Exception as e:
+        ekos.quit()
+        print(e)
 
