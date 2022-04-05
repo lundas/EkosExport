@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import csv
+import logging
 import os.path
 
 from datetime import datetime
@@ -9,6 +10,19 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+
+# Logging
+logger = logging.getLogger(__name__)
+# Handler
+log_path = '' # path to log file
+fh = logging.FileHandler('{}deliveries.log'.format(log_path))
+fh.setLevel(logging.INFO)
+# Formatter
+formatter = logging.Formatter(
+    '%(asctime)s : %(name)s : %(levelname)s : %(message)s'
+)
+fh.setFormatter(formatter)
+logger.addHandler(fh)
 
 class SheetsAPI:
 

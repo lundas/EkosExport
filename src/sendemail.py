@@ -1,9 +1,10 @@
 #!/usr/bin/env/ python
 
+import logging
+import mimetypes
 import os
 import smtplib
-import mimetypes
-import logging
+
 from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
@@ -12,18 +13,18 @@ from email.mime.audio import MIMEAudio
 from email.mime.image import MIMEImage
 from email.mime.text import MIMEText
 
-# # Set up logging
-# logger = logging.getLogger(__name__)
-# logger.setLevel(logging.INFO)
-# # Create file handler
-# fh = logging.FileHandler('DeliveryFormat/deliveryformat.log') # PATH to file on local machine
-# fh.setLevel(logging.INFO)
-# # Create formatter
-# formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-# # Add formatter to fh
-# fh.setFormatter(formatter)
-# # Add fh to logger
-# logger.addHandler(fh)
+# Logging
+logger = logging.getLogger(__name__)
+# Handler
+log_path = '' # path to log file
+fh = logging.FileHandler('{}deliveries.log'.format(log_path))
+fh.setLevel(logging.INFO)
+# Formatter
+formatter = logging.Formatter(
+	'%(asctime)s : %(name)s : %(levelname)s : %(message)s'
+)
+fh.setFormatter(formatter)
+logger.addHandler(fh)
 
 def send_gmail(
 	message, 

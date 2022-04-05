@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import logging
 import os
 import re
 
@@ -13,6 +14,19 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import NoSuchFrameException
 from selenium.common.exceptions import ElementClickInterceptedException
+
+# Logging
+logger = logging.getLogger(__name__)
+# Handler
+log_path = '' # path to log file
+fh = logging.FileHandler('{}deliveries.log'.format(log_path))
+fh.setLevel(logging.INFO)
+# Formatter
+formatter = logging.Formatter(
+    '%(asctime)s : %(name)s : %(levelname)s : %(message)s'
+)
+fh.setFormatter(formatter)
+logger.addHandler(fh)
 
 class EkosExport:
     '''Class for accessing and downloading items from Ekos ERP using Selenium

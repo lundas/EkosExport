@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import yaml
+import logging
 
 from src import ekosexport
 from src import googleapi
@@ -8,6 +9,19 @@ from src import googleapi
 conf_file = './deliveries_config_SAMPLE.yaml' # path to config file
 stream = open(conf_file, 'r')
 config = yaml.safe_load(stream)
+
+# Logging
+logger = logging.getLogger(__name__)
+# Handler
+log_path = '' # path to log file
+fh = logging.FileHandler('{}deliveries.log'.format(log_path))
+fh.setLevel(logging.INFO)
+# Formatter
+formatter = logging.Formatter(
+    '%(asctime)s : %(name)s : %(levelname)s : %(message)s'
+)
+fh.setFormatter(formatter)
+logger.addHandler(fh)
 
 # Variables
 # EkosExport class
