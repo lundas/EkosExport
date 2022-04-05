@@ -17,6 +17,7 @@ from selenium.common.exceptions import ElementClickInterceptedException
 
 # Logging
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 # Handler
 log_path = '' # path to log file
 fh = logging.FileHandler('{}deliveries.log'.format(log_path))
@@ -129,7 +130,7 @@ class EkosExport:
         password : ekos ERP password
         '''
         #open webdriver, go to Ekos login page
-        print('Logging into Ekos')
+        logger.info('Logging into Ekos')
         self.session.get('https://login.goekos.com/')
         assert 'Ekos' in self.session.title
         # enter login credentials
@@ -139,7 +140,7 @@ class EkosExport:
         elem.send_keys(password)
         elem.send_keys(Keys.RETURN)
 
-        print('Login Successful')
+        logger.info('Login Successful')
         self.session.implicitly_wait(10)
 
         # session.implicitly_wait(10) #wait for page to load
@@ -162,7 +163,7 @@ class EkosExport:
         # session.get('https://app.goekos.com/03.00/Report_Category') # TODO: user input url?
 
         # Navigate to reports page
-        print('navigating to reports page')
+        logger.info('Navigating to Reports Page')
         elem = self.wait.until(
             EC.element_to_be_clickable(
                 # select 4th button in nav-options div
@@ -193,11 +194,11 @@ class EkosExport:
 
         # Reports page is Ekos Classic iFrame
         # Switch to iFrame
-        print('switching to iFrame')
+        logger.info('Switching to iFrame')
         self.session.switch_to.frame('classicContainer')
         
         # find link by link text
-        print('opening report name: {}'.format(report_name))
+        logger.info('Opening Report name: {}'.format(report_name))
         # elem = WebDriverWait(session, 5).until(
         #   EC.element_to_be_clickable((By.LINK_TEXT, report_name))
         # )
@@ -209,11 +210,11 @@ class EkosExport:
         elem.click()
 
         # switch to iframe
-        print('switching to iFrame')
+        logger.info('Switching to iFrame')
         self.session.switch_to.frame('formFrame_0')
 
         # click export button
-        print('clicking export button')
+        logger.info('Clicking export button')
         elem = self.wait.until(
             EC.element_to_be_clickable(
                 (By.CLASS_NAME, 'buttonGroupInner')
@@ -222,7 +223,7 @@ class EkosExport:
         elem.click()
 
         # download report as csv
-        print('downloading report as csv to {}'.format(self.profile_dir_path))
+        logger.info('Downloading report as csv to {}'.format(self.profile_dir_path))
         elem = self.wait.until(
             EC.element_to_be_clickable(
                 (By.ID, 'csv_export')
@@ -231,7 +232,7 @@ class EkosExport:
         elem.click()
 
         # close iframe
-        print('closing iFrame')
+        logger.info('Closing iFrame')
         elem = self.wait.until(
             EC.element_to_be_clickable(
                 (By.CLASS_NAME, 'CloseButton')
@@ -276,14 +277,14 @@ class EkosExport:
         for f in os.listdir(PATH):
             count += 1
             if regex.match(f) != None:
-                print('File Found!')
+                logger.info('File Found!')
                 filename = regex.match(f).string
                 os.rename(PATH+filename, PATH+new_filename)
                 break
             elif regex.match(f) == None and count == len(os.listdir(PATH)):
-                print('File not found')
+                logger.warning('File not found')
             else:
-                print('File does not match regex. Checking next file')
+                logger.info('File does not match regex. Checking next file')
         return
 
 
@@ -300,7 +301,7 @@ if __name__ == '__main__':
 
     username = config['ekos_user']
     password = config['ekos_pw']
-    report = ''
+    report = 'Distro - This Week'
     dl_dir = config['profile_dir_path']
 
     ekos = EkosExport(

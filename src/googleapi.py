@@ -13,6 +13,7 @@ from googleapiclient.errors import HttpError
 
 # Logging
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 # Handler
 log_path = '' # path to log file
 fh = logging.FileHandler('{}deliveries.log'.format(log_path))
@@ -110,7 +111,7 @@ class SheetsAPI:
             service = build('sheets', 'v4', credentials=credentials)
 
         except HttpError as err:
-            print(err)
+            logging.exception(err)
         return service
 
     def import_data(
@@ -182,7 +183,7 @@ class SheetsAPI:
             result = request.execute()
 
         except HttpError as err:
-            print(err)
+            logger.exception(err)
 
         return
 

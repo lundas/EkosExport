@@ -12,6 +12,7 @@ config = yaml.safe_load(stream)
 
 # Logging
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 # Handler
 log_path = '' # path to log file
 fh = logging.FileHandler('{}deliveries.log'.format(log_path))
@@ -50,7 +51,8 @@ INFO_RANGE_NAME = 'info!B1'
 data = '{}{}.csv'.format(config['profile_dir_path'], report_name)
 
 if __name__ == '__main__':
-    try:    
+    try:
+        logger.info('Instantiating ekos object')
         ekos = ekosexport.EkosExport(
             browser = browser,
             driver_path = driver_path,
@@ -58,12 +60,13 @@ if __name__ == '__main__':
             profile_dir_path = profile_dir_path,
             headless = headless
         )
-
+        logger.info('Instantiating google sheets object')
         gs = googleapi.SheetsAPI(
             scopes = SCOPES,
             spreadsheet_id = SPREADSHEET_ID
         )
 
+        logger.info('Beginning report download process')
         ekos.login(username, password)
         ekos.download_report(report_name)
         ekos.rename_file('{}.csv'.format(report_name))
@@ -79,5 +82,5 @@ if __name__ == '__main__':
         gs.last_updated(service = service, sheet_range = INFO_RANGE_NAME)
     except Exception as e:
         ekos.quit()
-        print(e)
+        logger.exception(e)
 

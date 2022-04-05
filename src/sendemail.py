@@ -15,6 +15,7 @@ from email.mime.text import MIMEText
 
 # Logging
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 # Handler
 log_path = '' # path to log file
 fh = logging.FileHandler('{}deliveries.log'.format(log_path))
