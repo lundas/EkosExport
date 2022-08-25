@@ -140,7 +140,6 @@ class EkosExport:
         elem.send_keys(password)
         elem.send_keys(Keys.RETURN)
 
-        logger.info('Login Successful')
         self.session.implicitly_wait(10)
 
         # session.implicitly_wait(10) #wait for page to load
