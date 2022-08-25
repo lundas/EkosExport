@@ -107,7 +107,7 @@ class EkosExport:
             self.options = Options()
             if self.headless == True:
                 self.options.add_argument('-headless')
-                self.options.set_headless
+              #  self.options.set_headless
 
             self.session = webdriver.Firefox(
                 firefox_profile=self.profile,
